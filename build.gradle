@@ -62,10 +62,10 @@ dependencies {
     testImplementation "org.grails:grails-web-testing-support"
     testImplementation "org.spockframework:spock-core"
 
+    // https://mvnrepository.com/artifact/org.grails.plugins/quartz
+    implementation 'org.grails.plugins:quartz:4.0.0-SNAPSHOT'
+//    implementation('org.grails.plugins:quartz-monitor:1.5-SNAPSHOT')
 
-    // mysql 8
-    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
-    implementation 'mysql:mysql-connector-java:8.0.33'
 }
 
 compileJava.options.release = 17
