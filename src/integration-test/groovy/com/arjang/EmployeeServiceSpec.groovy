@@ -1,5 +1,6 @@
 package com.arjang
 
+import grails.gorm.transactions.Transactional
 import grails.testing.mixin.integration.Integration
 import grails.gorm.transactions.Rollback
 import spock.lang.Specification
@@ -7,20 +8,19 @@ import org.hibernate.SessionFactory
 
 @Integration
 @Rollback
+@Transactional(readOnly = false, connection = "myotherdb")
 class EmployeeServiceSpec extends Specification {
 
     EmployeeService employeeService
     SessionFactory sessionFactory
 
     private Long setupData() {
-        // TODO: Populate valid domain instances and return a valid ID
-        //new Employee(...).save(flush: true, failOnError: true)
-        //new Employee(...).save(flush: true, failOnError: true)
-        //Employee employee = new Employee(...).save(flush: true, failOnError: true)
-        //new Employee(...).save(flush: true, failOnError: true)
-        //new Employee(...).save(flush: true, failOnError: true)
-        assert false, "TODO: Provide a setupData() implementation for this generated test suite"
-        //employee.id
+        new Employee(name: "joe", lastname: "Mian", employeeId: 123456, employeeNotes: "hello").save(flush: true, failOnError: true)
+        new Employee(name: "joe", lastname: "Mian", employeeId: 123456, employeeNotes: "hello").save(flush: true, failOnError: true)
+        Employee employee = new Employee(name: "joe", lastname: "Mian", employeeId: 123456, employeeNotes: "hello").save(flush: true, failOnError: true)
+        new Employee(name: "joe", lastname: "Mian", employeeId: 123456, employeeNotes: "hello").save(flush: true, failOnError: true)
+        new Employee(name: "joe", lastname: "Mian", employeeId: 123456, employeeNotes: "hello").save(flush: true, failOnError: true)
+        employee.id
     }
 
     void "test get"() {
@@ -38,9 +38,14 @@ class EmployeeServiceSpec extends Specification {
 
         then:
         employeeList.size() == 2
-        assert false, "TODO: Verify the correct instances are returned"
     }
 
+    /**
+     * Fails because
+     * employeeService.count() == 5
+     |               |       |
+     |               16      false
+     */
     void "test count"() {
         setupData()
 
@@ -48,6 +53,12 @@ class EmployeeServiceSpec extends Specification {
         employeeService.count() == 5
     }
 
+    /**
+     * fails because
+     * employeeService.count() == 5
+     |               |       |
+     |               16      false
+     */
     void "test delete"() {
         Long employeeId = setupData()
 
@@ -64,8 +75,7 @@ class EmployeeServiceSpec extends Specification {
 
     void "test save"() {
         when:
-        assert false, "TODO: Provide a valid instance to save"
-        Employee employee = new Employee()
+        Employee employee = new Employee(name: "joe", lastname: "Mian", employeeId: 123456, employeeNotes: "hello")
         employeeService.save(employee)
 
         then:
