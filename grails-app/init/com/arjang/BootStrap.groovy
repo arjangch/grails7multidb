@@ -2,12 +2,16 @@ package com.arjang
 
 import com.arjang.*
 import grails.gorm.transactions.Transactional
+import jakarta.servlet.ServletContext
 
 class BootStrap {
 
-    def init = { servletContext ->
+    ServletContext servletContext
 
+    def init = {
     }
+
     def destroy = {
     }
+
 }
