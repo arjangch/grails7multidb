@@ -3,4 +3,4 @@
 java=17.0.13-zulu
 gradle=8.10.2
 groovy=4.0.24
-grails=7.0.0-M1
+grails=7.0.0-M3
